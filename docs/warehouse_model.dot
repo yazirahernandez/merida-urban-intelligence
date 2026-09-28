@@ -1,0 +1,115 @@
+digraph DW {
+  graph [rankdir=LR, fontname="Helvetica", fontsize=20, labelloc=t, pad=0.4, nodesep=0.5, ranksep=1.3,
+         label="Merida Urban Intelligence - Modelo dimensional (PostgreSQL/PostGIS, esquema dw)"];
+  node  [shape=plain, fontname="Helvetica", fontsize=11];
+  edge  [color="#555555", arrowhead=crow, arrowtail=none, dir=both, arrowsize=0.8];
+
+  dim_geografia [label=<
+  <table border="0" cellborder="1" cellspacing="0" cellpadding="4">
+   <tr><td bgcolor="#2E86AB"><font color="white"><b>dim_geografia</b></font></td></tr>
+   <tr><td align="left" port="pk"><b>PK geo_key</b></td></tr>
+   <tr><td align="left">cvegeo (UQ)</td></tr>
+   <tr><td align="left">nivel: municipio | ageb</td></tr>
+   <tr><td align="left">cve_ent, cve_mun, cve_loc, cve_ageb</td></tr>
+   <tr><td align="left">nom_mun</td></tr>
+   <tr><td align="left" port="parent">FK parent_geo_key (self)</td></tr>
+   <tr><td align="left">en_localidad_merida, tiene_censo</td></tr>
+   <tr><td align="left">area_km2</td></tr>
+   <tr><td align="left">geom MultiPolygon 4326</td></tr>
+  </table>>];
+
+  dim_tiempo [label=<
+  <table border="0" cellborder="1" cellspacing="0" cellpadding="4">
+   <tr><td bgcolor="#2E86AB"><font color="white"><b>dim_tiempo</b></font></td></tr>
+   <tr><td align="left" port="pk"><b>PK tiempo_key (YYYYMM)</b></td></tr>
+   <tr><td align="left">anio, mes, nombre_mes</td></tr>
+   <tr><td align="left">trimestre, semestre</td></tr>
+  </table>>];
+
+  dim_delito [label=<
+  <table border="0" cellborder="1" cellspacing="0" cellpadding="4">
+   <tr><td bgcolor="#2E86AB"><font color="white"><b>dim_delito</b></font></td></tr>
+   <tr><td align="left" port="pk"><b>PK delito_key</b></td></tr>
+   <tr><td align="left">bien_juridico</td></tr>
+   <tr><td align="left">tipo_delito, subtipo_delito</td></tr>
+   <tr><td align="left">modalidad</td></tr>
+  </table>>];
+
+  dim_scian [label=<
+  <table border="0" cellborder="1" cellspacing="0" cellpadding="4">
+   <tr><td bgcolor="#2E86AB"><font color="white"><b>dim_scian</b></font></td></tr>
+   <tr><td align="left" port="pk"><b>PK scian_key</b></td></tr>
+   <tr><td align="left">codigo_act (UQ), nombre_act</td></tr>
+   <tr><td align="left">sector, subsector</td></tr>
+   <tr><td align="left">grupo_kpi</td></tr>
+  </table>>];
+
+  dim_tamano [label=<
+  <table border="0" cellborder="1" cellspacing="0" cellpadding="4">
+   <tr><td bgcolor="#2E86AB"><font color="white"><b>dim_tamano</b></font></td></tr>
+   <tr><td align="left" port="pk"><b>PK tamano_key</b></td></tr>
+   <tr><td align="left">per_ocu, orden, estrato</td></tr>
+  </table>>];
+
+  dim_fuente [label=<
+  <table border="0" cellborder="1" cellspacing="0" cellpadding="4">
+   <tr><td bgcolor="#2E86AB"><font color="white"><b>dim_fuente</b></font></td></tr>
+   <tr><td align="left" port="pk"><b>PK fuente_key</b></td></tr>
+   <tr><td align="left">codigo, nombre, edicion</td></tr>
+   <tr><td align="left">archivo, grano_original</td></tr>
+  </table>>];
+
+  fact_censo [label=<
+  <table border="0" cellborder="1" cellspacing="0" cellpadding="4">
+   <tr><td bgcolor="#E07A5F"><font color="white"><b>fact_censo</b></font></td></tr>
+   <tr><td bgcolor="#FBE3DC" align="left"><i>Grano: 1 unidad geografica (AGEB o municipio), Censo 2020</i></td></tr>
+   <tr><td align="left" port="geo"><b>PK/FK geo_key</b></td></tr>
+   <tr><td align="left" port="fuente">FK fuente_key</td></tr>
+   <tr><td align="left">pobtot, pobfem, pobmas, grupos de edad</td></tr>
+   <tr><td align="left">p_12ymas, pea, pe_inac, pocupada, pdesocup</td></tr>
+   <tr><td align="left">graproes, psinder, pder_ss</td></tr>
+   <tr><td align="left">tothog, vivtot, tvivhab, vph_*</td></tr>
+  </table>>];
+
+  fact_establecimiento [label=<
+  <table border="0" cellborder="1" cellspacing="0" cellpadding="4">
+   <tr><td bgcolor="#E07A5F"><font color="white"><b>fact_establecimiento</b></font></td></tr>
+   <tr><td bgcolor="#FBE3DC" align="left"><i>Grano: 1 establecimiento DENUE (05/2026)</i></td></tr>
+   <tr><td align="left"><b>PK id_denue</b></td></tr>
+   <tr><td align="left" port="geo">FK geo_ageb_key (NULL = fuera de AGEB)</td></tr>
+   <tr><td align="left" port="mun">FK geo_mun_key</td></tr>
+   <tr><td align="left" port="scian">FK scian_key, FK tamano_key</td></tr>
+   <tr><td align="left" port="tiempo">FK alta_tiempo_key, FK fuente_key</td></tr>
+   <tr><td align="left">n_establecimientos (=1), nom_estab</td></tr>
+   <tr><td align="left">cvegeo_ageb_reportado</td></tr>
+   <tr><td align="left">geom Point 4326</td></tr>
+  </table>>];
+
+  fact_delito_mensual [label=<
+  <table border="0" cellborder="1" cellspacing="0" cellpadding="4">
+   <tr><td bgcolor="#E07A5F"><font color="white"><b>fact_delito_mensual</b></font></td></tr>
+   <tr><td bgcolor="#FBE3DC" align="left"><i>Grano: municipio x mes x delito (SESNSP)</i></td></tr>
+   <tr><td align="left" port="geo"><b>PK/FK geo_key</b></td></tr>
+   <tr><td align="left" port="tiempo"><b>PK/FK tiempo_key</b></td></tr>
+   <tr><td align="left" port="delito"><b>PK/FK delito_key</b></td></tr>
+   <tr><td align="left" port="fuente">FK fuente_key</td></tr>
+   <tr><td align="left">incidentes</td></tr>
+  </table>>];
+
+  dim_geografia:pk:e -> fact_censo:geo:w;
+  dim_geografia:pk:e -> fact_establecimiento:geo:w [label="ageb", fontsize=9];
+  dim_geografia:pk:e -> fact_establecimiento:mun:w [label="municipio", fontsize=9];
+  dim_geografia:pk:e -> fact_delito_mensual:geo:w  [label="municipio", fontsize=9];
+  dim_geografia:parent:w -> dim_geografia:pk:w [style=dashed, label="parent", fontsize=9];
+  dim_tiempo:pk:e -> fact_delito_mensual:tiempo:w;
+  dim_tiempo:pk:e -> fact_establecimiento:tiempo:w [label="fecha alta", fontsize=9];
+  dim_delito:pk:e -> fact_delito_mensual:delito:w;
+  dim_scian:pk:e  -> fact_establecimiento:scian:w;
+  dim_tamano:pk:e -> fact_establecimiento:scian:w;
+  dim_fuente:pk:e -> fact_censo:fuente:w [color="#AAAAAA", style=dotted];
+  dim_fuente:pk:e -> fact_establecimiento:tiempo:w [color="#AAAAAA", style=dotted];
+  dim_fuente:pk:e -> fact_delito_mensual:fuente:w [color="#AAAAAA", style=dotted];
+
+  {rank=same; dim_geografia; dim_fuente; dim_tiempo; dim_delito; dim_scian; dim_tamano;}
+  {rank=same; fact_censo; fact_establecimiento; fact_delito_mensual;}
+}
