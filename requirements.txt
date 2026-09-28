@@ -1,0 +1,8 @@
+pandas>=2.0
+geopandas>=0.14
+pyogrio>=0.7
+shapely>=2.0
+matplotlib>=3.7
+sqlalchemy>=2.0
+psycopg2-binary>=2.9
+geoalchemy2>=0.14
