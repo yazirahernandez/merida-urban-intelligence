@@ -1,0 +1,69 @@
+
+========================================================================
+0. Conjuntos de analisis
+========================================================================
+AGEB en la vista: 501 | con censo y pobtot >= 100: 467 | sin nulos en variables: 465
+Municipios: 106 | tasa cruda x1000: media 1.08, max 5.49 | tasa EB x1000: media 1.37, max 4.52
+Pesos AGEB: Queen, n=465, islas conectadas por KNN(1)=1, vecinos por unidad: media 5.4, min 1, max 20
+Pesos municipio: Queen, n=106, islas conectadas por KNN(1)=2, vecinos por unidad: media 5.0, min 1, max 11
+
+========================================================================
+1. Distribucion geografica (mapas en outputs/maps)
+========================================================================
+Mapas 01-03 guardados.
+Merida 2023-2025: 7,131 incidentes | mes con mas: 11 | mes con menos: 1
+Top tipos Merida 2023-2025:
+tipo_delito
+Daño a la propiedad              1668
+Narcomenudeo                      938
+Robo                              709
+Amenazas                          655
+Otros delitos del Fuero Común     653
+Violencia familiar                580
+Lesiones                          411
+Fraude                            294
+
+========================================================================
+2. Correlaciones (Spearman; Pearson como referencia)
+========================================================================
+   escala                                      relacion   n  spearman_rho spearman_p  pearson_r
+     AGEB Densidad de poblacion vs densidad de negocios 465         0.434   8.86e-23      0.538
+     AGEB          Escolaridad vs densidad de servicios 465        -0.047   3.17e-01     -0.130
+     AGEB                 % 65+ vs densidad de comercio 465         0.383   1.13e-17      0.322
+     AGEB             Tasa PEA vs negocios por 1000 hab 465        -0.356   2.22e-15     -0.317
+Municipio  Densidad de negocios vs tasa de delitos (EB) 106         0.089   3.67e-01      0.280
+Municipio Densidad de poblacion vs tasa de delitos (EB) 106         0.056   5.69e-01      0.271
+Municipio Negocios por 1000 hab vs tasa de delitos (EB) 106         0.065   5.09e-01     -0.067
+
+========================================================================
+3. Moran's I global (999 permutaciones)
+========================================================================
+   escala                     variable      I      EI       z  p_sim                              interpretacion
+     AGEB                 log_dens_pob 0.4679 -0.0022 15.9802  0.001 Agrupamiento: valores similares son vecinos
+     AGEB                 log_dens_neg 0.5079 -0.0022 17.2566  0.001 Agrupamiento: valores similares son vecinos
+     AGEB                 log_dens_com 0.4881 -0.0022 17.1761  0.001 Agrupamiento: valores similares son vecinos
+     AGEB                log_dens_serv 0.5265 -0.0022 17.5673  0.001 Agrupamiento: valores similares son vecinos
+     AGEB                 tasa_pea_pct 0.5593 -0.0022 19.1075  0.001 Agrupamiento: valores similares son vecinos
+     AGEB                   pct_65_mas 0.8387 -0.0022 28.9865  0.001 Agrupamiento: valores similares son vecinos
+     AGEB                     graproes 0.7769 -0.0022 27.1915  0.001 Agrupamiento: valores similares son vecinos
+Municipio                 log_dens_neg 0.2847 -0.0095  4.9461  0.001 Agrupamiento: valores similares son vecinos
+Municipio              tasa_delitos_eb 0.2550 -0.0095  4.3051  0.001 Agrupamiento: valores similares son vecinos
+Municipio tasa_delitos (Moran_Rate EB) 0.2687 -0.0095  4.5731  0.001 Agrupamiento: valores similares son vecinos
+
+========================================================================
+4. LISA - Local Moran (p < 0.05)
+========================================================================
+AGEB log_dens_neg: {'No significativo': 339, 'HH': 85, 'LL': 36, 'HL': 4, 'LH': 1}
+AGEB log_dens_pob: {'No significativo': 328, 'HH': 76, 'LL': 52, 'LH': 5, 'HL': 4}
+Municipio tasa_delitos_eb: {'No significativo': 72, 'LL': 18, 'HH': 10, 'HL': 3, 'LH': 3}
+  Municipios HH (alta tasa rodeados de alta tasa): ['Baca', 'Bokobá', 'Dzemul', 'Ixil', 'Mérida', 'Mocochá', 'Motul', 'Progreso', 'Suma', 'Telchac Pueblo']
+
+========================================================================
+5. Moran bivariado global (x focal, y rezagada espacialmente)
+========================================================================
+   escala            x      y_rezagada    I_bv       z  p_sim
+     AGEB log_dens_pob    log_dens_neg  0.2806  7.6093  0.001
+     AGEB     graproes   log_dens_serv -0.0279 -0.5542  0.288
+Municipio log_dens_neg tasa_delitos_eb  0.1023  1.5727  0.057
+Municipio log_dens_pob tasa_delitos_eb  0.1718  2.2970  0.006
+AGEB BV pob~W negocios: {'No significativo': 339, 'HH': 51, 'LH': 35, 'LL': 33, 'HL': 7}

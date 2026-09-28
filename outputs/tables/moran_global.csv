@@ -1,0 +1,11 @@
+escala,variable,I,EI,z,p_sim,interpretacion
+AGEB,log_dens_pob,0.46785923310047733,-0.0021551724137931034,15.980228832193077,0.001,Agrupamiento: valores similares son vecinos
+AGEB,log_dens_neg,0.5078840759637345,-0.0021551724137931034,17.256621624452986,0.001,Agrupamiento: valores similares son vecinos
+AGEB,log_dens_com,0.4880522055139869,-0.0021551724137931034,17.176086004441274,0.001,Agrupamiento: valores similares son vecinos
+AGEB,log_dens_serv,0.5264641716437055,-0.0021551724137931034,17.567322904888464,0.001,Agrupamiento: valores similares son vecinos
+AGEB,tasa_pea_pct,0.5592882090630876,-0.0021551724137931034,19.107459219138892,0.001,Agrupamiento: valores similares son vecinos
+AGEB,pct_65_mas,0.838696059031768,-0.0021551724137931034,28.9864622489408,0.001,Agrupamiento: valores similares son vecinos
+AGEB,graproes,0.7769308471888527,-0.0021551724137931034,27.19151112180008,0.001,Agrupamiento: valores similares son vecinos
+Municipio,log_dens_neg,0.2847080260720425,-0.009523809523809525,4.946111988422637,0.001,Agrupamiento: valores similares son vecinos
+Municipio,tasa_delitos_eb,0.255019426412201,-0.009523809523809525,4.3050724557953775,0.001,Agrupamiento: valores similares son vecinos
+Municipio,tasa_delitos (Moran_Rate EB),0.26870351541399173,-0.009523809523809525,4.573117379161113,0.001,Agrupamiento: valores similares son vecinos

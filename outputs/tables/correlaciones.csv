@@ -1,0 +1,8 @@
+escala,relacion,x,y,n,spearman_rho,spearman_p,pearson_r,pearson_p
+AGEB,Densidad de poblacion vs densidad de negocios,log_dens_pob,log_dens_neg,465,0.434,8.860239621003095e-23,0.538,3.435739790249257e-36
+AGEB,Escolaridad vs densidad de servicios,graproes,log_dens_serv,465,-0.047,0.3165479122591692,-0.13,0.00505479692510624
+AGEB,% 65+ vs densidad de comercio,pct_65_mas,log_dens_com,465,0.383,1.1317931641534781e-17,0.322,1.1250129119473185e-12
+AGEB,Tasa PEA vs negocios por 1000 hab,tasa_pea_pct,log_neg_x1000,465,-0.356,2.2248191494109133e-15,-0.317,2.4964816369290293e-12
+Municipio,Densidad de negocios vs tasa de delitos (EB),log_dens_neg,tasa_delitos_eb,106,0.089,0.3666837467898653,0.28,0.0036295145355478707
+Municipio,Densidad de poblacion vs tasa de delitos (EB),log_dens_pob,tasa_delitos_eb,106,0.056,0.5690580349895816,0.271,0.00499552058724495
+Municipio,Negocios por 1000 hab vs tasa de delitos (EB),negocios_x1000hab,tasa_delitos_eb,106,0.065,0.5093853296581026,-0.067,0.4975518024215679

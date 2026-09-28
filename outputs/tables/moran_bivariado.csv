@@ -1,0 +1,5 @@
+escala,x,y_rezagada,I_bv,z,p_sim
+AGEB,log_dens_pob,log_dens_neg,0.28061334520474296,7.609266358050459,0.001
+AGEB,graproes,log_dens_serv,-0.02794099026377427,-0.5541898303919625,0.288
+Municipio,log_dens_neg,tasa_delitos_eb,0.10232514366189549,1.5727397698694985,0.057
+Municipio,log_dens_pob,tasa_delitos_eb,0.17177773893726456,2.296988871457848,0.006
