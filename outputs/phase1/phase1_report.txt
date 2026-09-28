@@ -1,0 +1,138 @@
+
+======================================================================
+1. CENSO 2020 - Principales resultados por AGEB y manzana urbana
+======================================================================
+Archivo: RESAGEBURB_31CSV20.csv | filas=40,140 | columnas=230
+AGEB urbanas en Merida (31-050-0001): 483
+CVEGEO duplicados: 0
+      var  n_asterisco  n_ND  min  mediana     max
+   POBTOT            0     0  0.0 1797.000 7244.00
+   POBFEM            3     0  0.0  947.500 3772.00
+   POBMAS            3     0  0.0  861.000 3472.00
+ P_12YMAS            3     0  0.0 1538.000 5534.00
+      PEA            3     0  0.0  966.000 4146.00
+  PE_INAC            4     0  0.0  572.000 1966.00
+ POCUPADA            3     0  0.0  951.500 4106.00
+ PDESOCUP           47     0  0.0   12.500  148.00
+  POB0_14            6     0  0.0  335.000 2006.00
+ POB15_64            3     0  0.0 1293.500 5041.00
+POB65_MAS            8     0  0.0  150.000 1023.00
+ P_60YMAS           10     0  0.0  237.000 1360.00
+ GRAPROES            3     0  0.0   11.495   15.97
+   VIVTOT            0     0  0.0  688.000 3268.00
+  TVIVHAB            3     0  0.0  568.500 2499.00
+VPH_INTER            5     0  0.0  416.000 1890.00
+VPH_AUTOM            7     0  0.0  321.000 1548.00
+  PSINDER            3     0  0.0  396.000 1912.00
+Poblacion total localidad (suma AGEB): 921,771
+AGEB con POBTOT < 100 (tasas inestables): 16
+AGEB con POBTOT = 0: 5
+
+======================================================================
+2. MARCO GEOESTADISTICO - poligonos AGEB urbana (31a) y municipios (31mun)
+======================================================================
+CRS original AGEB: MEXICO_ITRF_2008_LCC
+Campos AGEB: ['CVE_ENT', 'CVE_MUN', 'CVE_LOC', 'CVE_AGEB', 'CVEGEO', 'geometry']
+AGEB urbanas Yucatan: 1562 | municipios: 106
+AGEB poligonos Merida (050-0001): 501
+Geometrias invalidas: 0 | vacias: 0
+Area km2 -> min 0.016 | mediana 0.407 | max 6.549 | total 245.8
+
+-- Integracion censo <-> poligonos (CVEGEO) --
+En ambos: 483 | solo censo: 0 | solo poligonos: 18
+% de AGEB del censo con poligono: 100.0%
+Poblacion en AGEB del censo SIN poligono: 0
+
+======================================================================
+3. DENUE - establecimientos Yucatan
+======================================================================
+Archivo: denue_31_csv.zip!conjunto_de_datos/denue_inegi_31_.csv | filas=146,384
+Columnas: ['id', 'clee', 'nom_estab', 'raz_social', 'codigo_act', 'nombre_act', 'per_ocu', 'tipo_vial', 'nom_vial', 'tipo_v_e_1', 'nom_v_e_1', 'tipo_v_e_2', 'nom_v_e_2', 'tipo_v_e_3', 'nom_v_e_3', 'numero_ext', 'letra_ext', 'edificio', 'edificio_e', 'numero_int', 'letra_int', 'tipo_asent', 'nomb_asent', 'tipocencom', 'nom_cencom', 'num_local', 'cod_postal', 'cve_ent', 'entidad', 'cve_mun', 'municipio', 'cve_loc', 'localidad', 'ageb', 'manzana', 'telefono', 'correoelec', 'www', 'tipounieco', 'latitud', 'longitud', 'fecha_alta']
+Establecimientos municipio Merida: 56,909
+id duplicados: 0
+Sin coordenadas: 0
+Rango lat 20.7696..21.1580 | lon -89.7316..-89.4904
+Top sectores SCIAN (2 digitos):
+sector2
+46    19441
+81     9473
+72     8259
+62     4212
+43     2071
+31     2019
+61     1895
+54     1751
+53     1245
+33     1236
+Tamano (per_ocu):
+per_ocu
+0 a 5 personas        45587
+6 a 10 personas        5364
+11 a 30 personas       4169
+31 a 50 personas        773
+51 a 100 personas       519
+101 a 250 personas      332
+251 y más personas      165
+
+Grupos para KPIs (comercio = SCIAN 46, servicios = SCIAN 51-81):
+                        n   pct
+grupo_kpi                      
+servicios           29433  51.7
+comercio_minorista  19441  34.2
+industria            4939   8.7
+comercio_mayorista   2071   3.6
+transporte            509   0.9
+gobierno              502   0.9
+primario               14   0.0
+Sin clasificar (revisar codigos): 0
+
+-- Integracion DENUE -> AGEB (point-in-polygon) --
+Puntos del municipio dentro de alguna AGEB de la localidad: 55,057 de 56,909 (96.7%)
+(los que quedan fuera son de comisarias/localidades rurales: esperado)
+Coincidencia sjoin vs clave AGEB reportada por DENUE: 100.0%
+
+-- Vista previa KPIs economicos por AGEB --
+AGEB sin ningun negocio: 19
+AGEB nuevas (sin censo) con negocios: 9
+Sector dominante (n de AGEB):
+sector_dominante
+46    402
+81     35
+72     14
+62     13
+43      8
+54      3
+53      2
+31      2
+       dens_negocios_km2  dens_comercio_km2  dens_servicios_km2  negocios_x1000hab
+count              501.0              501.0               501.0              467.0
+mean               259.0               88.8               135.2              103.8
+std                292.1              165.1               126.2              655.5
+min                  0.0                0.0                 0.0                0.0
+25%                104.9               31.2                49.1               30.0
+50%                237.2               72.8               119.8               47.5
+75%                353.2              113.8               186.8               72.4
+max               5246.3             3396.7              1633.1            13900.5
+
+======================================================================
+4. DELITOS - SESNSP incidencia municipal (sin coordenadas)
+======================================================================
+Filas Yucatan: 114,268 | anios 2015-2025
+Municipios en delitos: 106 | tipos: 40 | subtipos: 55
+Celdas mensuales vacias (meses aun no publicados o nulos): 0
+Incidentes por anio (Yucatan):
+Año
+2015    34716
+2016    34288
+2017    24390
+2018    13129
+2019    16419
+2020     8417
+2021     8565
+2022     4209
+2023     4280
+2024     4147
+2025     5357
+
+-- Integracion delitos <-> poligonos municipales --
+En ambos: 106 | solo delitos: [] | solo poligonos: []
