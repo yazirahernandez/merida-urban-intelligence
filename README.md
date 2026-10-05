@@ -381,3 +381,16 @@ El modelo alcanza **RMSE de 31.80 y R² de 0.9417**, indicando un excelente equi
 **Competencia:** Kaggle Regression Challenge  
 **Dataset:** MLB Historical Statistics  
 **Status:** ✓ LISTO PARA SUBMIT
+
+---
+
+## 10. Dashboard (extra)
+
+Dashboard interactivo en Streamlit que lee del Data Warehouse y de los resultados de la Fase 3. Tiene un menú lateral con seis secciones: Resumen, Población (AGEB), Actividad económica (AGEB), Seguridad pública (municipios), Análisis espacial y Datos y fuentes.
+
+```bash
+docker compose up -d
+python src/etl.py                      # solo la primera vez
+python src/phase3_spatial_analysis.py  # genera las tablas y mapas que usa la sección de análisis
+streamlit run src/dashboard.py         # abre http://localhost:8501
+```
