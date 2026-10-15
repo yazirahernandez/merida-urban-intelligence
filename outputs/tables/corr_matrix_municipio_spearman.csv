@@ -1,0 +1,8 @@
+,Population density (log),Business density (log),"Businesses per 1,000",Active population rate,Aged 65+ (%),Crime rate (EB),Crimes per 100 businesses
+Population density (log),1.0,0.842,-0.262,0.455,-0.195,0.056,0.233
+Business density (log),0.842,1.0,0.243,0.308,-0.166,0.089,-0.016
+"Businesses per 1,000",-0.262,0.243,1.0,-0.26,0.057,0.065,-0.469
+Active population rate,0.455,0.308,-0.26,1.0,-0.442,-0.126,0.263
+Aged 65+ (%),-0.195,-0.166,0.057,-0.442,1.0,0.221,-0.025
+Crime rate (EB),0.056,0.089,0.065,-0.126,0.221,1.0,0.715
+Crimes per 100 businesses,0.233,-0.016,-0.469,0.263,-0.025,0.715,1.0
