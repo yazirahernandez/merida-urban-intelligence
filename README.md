@@ -394,3 +394,23 @@ python src/etl.py                      # solo la primera vez
 python src/phase3_spatial_analysis.py  # genera las tablas y mapas que usa la sección de análisis
 streamlit run src/dashboard.py         # abre http://localhost:8501
 ```
+
+---
+
+## 11. Report figures, additional insights and technical report
+
+After the ETL and Phase 3 (section 7), three more scripts complete the workflow:
+
+```bash
+python src/report_figures.py   # English figures: correlation matrices, Moran scatterplots, maps -> outputs/report_figures/
+python src/extra_insights.py   # beyond the brief: beach season, schools vs children, jobs vs residence
+python src/build_report.py     # builds docs/Merida_Urban_Intelligence_Technical_Report.pdf from the warehouse
+```
+
+`extra_insights.py` adds three exploratory analyses that use only data already in the warehouse:
+
+- **Beach season:** whether coastal municipalities concentrate their crime in July–August. The hypothesis was not supported, and recorded crime is below average in summer everywhere.
+- **Schools vs children:** basic schools within 1 km against school-age population. School supply did not follow children to the periphery, and 40 under-served AGEBs form clusters.
+- **Jobs vs residence:** estimated jobs against resident workers. It identifies job centres and dormitory areas and explains the Low-High centre.
+
+The coastal municipalities are an explicit list (`COASTAL`) in `src/extra_insights.py`.
